@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
+#include <errno.h>
 
 // Addition 
 double add(double a, double b){
@@ -19,8 +21,8 @@ double multiply(double a, double b){
 // Division
 double divide(double a, double b){
     if (b == 0) {
-        printf("không thể chia cho 0!\n");
-        return 0; // sao trả về 0? haỹ trả về NAN (Tra thư viện C tên 'math')
+        fprintf(stderr, "không thể chia cho 0! %d\n", errno);
+        return NAN; // sao trả về 0? haỹ trả về NAN (Tra thư viện C tên 'math')(đã sửa)
     }
     return a / b;
 }
@@ -40,12 +42,13 @@ double operate(double a, double b, char operation){
         return divide(a, b);
     }
     else {
-        printf("Phép toán không hợp lệ!\n");  // print error chưa ổn. Dùng thư viện errno
-        return 0; // sao trả về 0? haỹ trả về NAN (Tra thư viện C tên 'math')
+        fprintf(stderr, "Phép toán không hợp lệ! %d\n", errno); // print error chưa ổn. Dùng thư viện errno
+        return NAN; // sao trả về 0? haỹ trả về NAN (Tra thư viện C tên 'math')(đã sửa)
     }
 }
 
 //  viết function để validate input cho operator (+ - * / )
+
 
 int main(){
     double a, b, result;
