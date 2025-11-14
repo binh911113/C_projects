@@ -20,7 +20,7 @@ double multiply(double a, double b){
 double divide(double a, double b){
     if (b == 0) {
         printf("không thể chia cho 0!\n");
-        return 0;
+        return 0; // sao trả về 0? haỹ trả về NAN (Tra thư viện C tên 'math')
     }
     return a / b;
 }
@@ -40,10 +40,12 @@ double operate(double a, double b, char operation){
         return divide(a, b);
     }
     else {
-        printf("Phép toán không hợp lệ!\n");
-        return 0;
+        printf("Phép toán không hợp lệ!\n");  // print error chưa ổn. Dùng thư viện errno
+        return 0; // sao trả về 0? haỹ trả về NAN (Tra thư viện C tên 'math')
     }
 }
+
+//  viết function để validate input cho operator (+ - * / )
 
 int main(){
     double a, b, result;
